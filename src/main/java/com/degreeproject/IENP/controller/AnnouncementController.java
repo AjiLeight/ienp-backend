@@ -52,4 +52,21 @@ public class AnnouncementController {
         announcementService.deleteAnnouncement(id);
         return new ResponseEntity<>("deleted", HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateAnnouncement(@PathVariable("id") Long id, @RequestBody AnnouncementDto announcement){
+        if(!announcementService.existById(id)){
+            return new ResponseEntity<>("no such announcement", HttpStatus.BAD_REQUEST);
+        }
+        Announcement exisitingAnnouncement = announcementService.getAnnouncementById(id);
+        exisitingAnnouncement.setTitle(announcement.getTitle());
+        exisitingAnnouncement.setSubject(announcement.getTitle());
+        exisitingAnnouncement.setDescription(announcement.getDescription());
+        exisitingAnnouncement.setFacultyId(announcement.getFacultyId());
+        exisitingAnnouncement.setDate(new Date());
+
+        announcementService.updateAnnouncement(exisitingAnnouncement);
+        return new ResponseEntity<>("updated successfully", HttpStatus.OK);
+
+    }
 }

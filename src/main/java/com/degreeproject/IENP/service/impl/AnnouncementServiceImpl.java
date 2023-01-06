@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
@@ -23,6 +24,16 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     @Override
     public Announcement addAnnouncement(Announcement announcement) {
         return announcementRepository.save(announcement);
+    }
+
+    @Override
+    public Announcement updateAnnouncement(Announcement announcement) {
+        return announcementRepository.save(announcement);
+    }
+
+    @Override
+    public Announcement getAnnouncementById(Long id) {
+        return announcementRepository.findById(id).orElseThrow(() -> new NoSuchElementException("No such announcement"));
     }
 
     @Override
