@@ -1,4 +1,7 @@
 package com.degreeproject.IENP.repository;
 
-public class FacultyRepository {
+import com.degreeproject.IENP.entity.Faculty;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FacultyRepository extends JpaRepository<Faculty, Long> {
 }

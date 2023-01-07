@@ -3,8 +3,10 @@ package com.degreeproject.IENP.controller;
 import com.degreeproject.IENP.dto.AuthResponseDto;
 import com.degreeproject.IENP.dto.LoginDto;
 import com.degreeproject.IENP.dto.RegisterDto;
+import com.degreeproject.IENP.entity.Faculty;
 import com.degreeproject.IENP.entity.Role;
 import com.degreeproject.IENP.entity.UserEntity;
+import com.degreeproject.IENP.repository.FacultyRepository;
 import com.degreeproject.IENP.repository.RoleRepository;
 import com.degreeproject.IENP.repository.UserRepository;
 import com.degreeproject.IENP.security.JwtGenerator;
@@ -30,18 +32,21 @@ public class AuthController {
     private RoleRepository roleRepository;
     private AuthenticationManager authenticationManager;
     private JwtGenerator jwtGenerator;
+    private FacultyRepository facultyRepository;
 
     @Autowired
     public AuthController(UserRepository userRepository,
                           PasswordEncoder passwordEncoder,
                           RoleRepository roleRepository,
                           AuthenticationManager authenticationManager,
-                          JwtGenerator jwtGenerator) {
+                          JwtGenerator jwtGenerator,
+                          FacultyRepository facultyRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
         this.authenticationManager = authenticationManager;
         this.jwtGenerator = jwtGenerator;
+        this.facultyRepository = facultyRepository;
     }
 
     @PostMapping("register")
@@ -55,8 +60,15 @@ public class AuthController {
 
         Role role =roleRepository.findByName("USER").get();
         user.setRole(Collections.singletonList(role));
-
         userRepository.save(user);
+
+        Faculty userFaculty = new Faculty();
+
+        userFaculty.setUsername(registerDto.getUsername());
+        userFaculty.setName(registerDto.getName());
+        userFaculty.setDepartment(registerDto.getDepartment());
+
+        facultyRepository.save(userFaculty);
 
         return new ResponseEntity<>("User Created Successfully", HttpStatus.OK);
 
