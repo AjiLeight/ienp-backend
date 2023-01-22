@@ -41,10 +41,11 @@ public class AnnouncementController {
     @GetMapping
     private ResponseEntity<List<Announcement>> getAnnouncement(){
         return new ResponseEntity<>(announcementService.getAnnouncement(), HttpStatus.OK);
+
     }
     @GetMapping("/{id}")
-    private ResponseEntity<List<Announcement>> getAnnouncementByFacultyId(@PathVariable("id") Long id){
-        return new ResponseEntity<>(announcementService.getAnnouncementByFacultyId(id), HttpStatus.OK);
+    private ResponseEntity<List<Announcement>> getAnnouncementByFacultyId(@PathVariable("id") String id){
+        return new ResponseEntity<>(announcementService.getAnnouncementByFacultyIdOrdered(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

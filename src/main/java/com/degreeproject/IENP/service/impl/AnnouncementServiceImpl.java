@@ -31,10 +31,6 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         return announcementRepository.save(announcement);
     }
 
-    @Override
-    public List<Announcement> getAnnouncementByFacultyId(Long id) {
-        return announcementRepository.findAllByFacultyId(id);
-    }
 
     @Override
     public Announcement getAnnouncementById(Long id) {
@@ -43,7 +39,12 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     public List<Announcement> getAnnouncement() {
-        return announcementRepository.findAll();
+        return announcementRepository.findAllByOrderByDateDesc();
+    }
+
+    @Override
+    public List<Announcement> getAnnouncementByFacultyIdOrdered(String id) {
+        return  announcementRepository.findAllByFacultyIdOrderByDateDesc(id);
     }
 
     @Override

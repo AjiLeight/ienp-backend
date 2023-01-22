@@ -9,9 +9,9 @@ public class AnnouncementDto {
     private String title;
     private String subject;
     private String description;
-    private Long facultyId;
+    private String facultyId;
 
-    public AnnouncementDto(String title, String subject, String description, Long facultyId) {
+    public AnnouncementDto(String title, String subject, String description, String facultyId) {
         this.title = title;
         this.subject = subject;
         this.description = description;

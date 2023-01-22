@@ -18,7 +18,7 @@ public class Announcement {
     private String subject;
     private String description;
     private Date date;
-    private Long facultyId;
+    private String facultyId;
 
     public Announcement() {
     }
