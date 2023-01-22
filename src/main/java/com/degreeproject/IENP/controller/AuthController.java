@@ -50,9 +50,9 @@ public class AuthController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
+    public ResponseEntity<AuthResponseDto> register(@RequestBody RegisterDto registerDto){
         if(userRepository.existsByUsername(registerDto.getUsername())){
-            return new ResponseEntity<>("username already taken", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new AuthResponseDto("Email already taken"), HttpStatus.BAD_REQUEST);
         }
         UserEntity user = new UserEntity();
         user.setUsername(registerDto.getUsername());
@@ -70,7 +70,17 @@ public class AuthController {
 
         facultyRepository.save(userFaculty);
 
-        return new ResponseEntity<>("User Created Successfully", HttpStatus.OK);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        registerDto.getUsername(),
+                        registerDto.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
 
     }
 

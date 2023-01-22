@@ -32,6 +32,11 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
+    public List<Announcement> getAnnouncementByFacultyId(Long id) {
+        return announcementRepository.findAllByFacultyId(id);
+    }
+
+    @Override
     public Announcement getAnnouncementById(Long id) {
         return announcementRepository.findById(id).orElseThrow(() -> new NoSuchElementException("No such announcement"));
     }

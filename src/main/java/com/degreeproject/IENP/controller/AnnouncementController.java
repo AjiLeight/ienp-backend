@@ -42,6 +42,10 @@ public class AnnouncementController {
     private ResponseEntity<List<Announcement>> getAnnouncement(){
         return new ResponseEntity<>(announcementService.getAnnouncement(), HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    private ResponseEntity<List<Announcement>> getAnnouncementByFacultyId(@PathVariable("id") Long id){
+        return new ResponseEntity<>(announcementService.getAnnouncementByFacultyId(id), HttpStatus.OK);
+    }
 
     @DeleteMapping("/{id}")
     private ResponseEntity<String> deleteAnnouncement(@PathVariable("id") Long id){

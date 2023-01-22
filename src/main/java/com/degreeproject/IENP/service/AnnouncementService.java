@@ -9,7 +9,7 @@ public interface AnnouncementService {
 
     public Announcement addAnnouncement(Announcement announcement);
     public Announcement updateAnnouncement(Announcement announcement);
-
+    public List<Announcement> getAnnouncementByFacultyId(Long Id);
     public Announcement getAnnouncementById(Long Id);
     public List<Announcement> getAnnouncement();
     public void deleteAnnouncement(Long id);
