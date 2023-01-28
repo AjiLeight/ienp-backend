@@ -31,6 +31,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         return announcementRepository.save(announcement);
     }
 
+
     @Override
     public Announcement getAnnouncementById(Long id) {
         return announcementRepository.findById(id).orElseThrow(() -> new NoSuchElementException("No such announcement"));
@@ -38,7 +39,12 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     public List<Announcement> getAnnouncement() {
-        return announcementRepository.findAll();
+        return announcementRepository.findAllByOrderByDateDesc();
+    }
+
+    @Override
+    public List<Announcement> getAnnouncementByFacultyIdOrdered(String id) {
+        return  announcementRepository.findAllByFacultyIdOrderByDateDesc(id);
     }
 
     @Override

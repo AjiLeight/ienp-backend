@@ -1,4 +1,6 @@
 package com.degreeproject.IENP.service;
 
-public class FacultyService {
+import com.degreeproject.IENP.entity.Faculty;
+
+public interface FacultyService {
 }
