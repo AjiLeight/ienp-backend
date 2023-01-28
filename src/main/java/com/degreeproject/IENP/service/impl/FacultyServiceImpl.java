@@ -16,6 +16,7 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
 
+
     @Override
     public Faculty getFaculty(String username) {
         return facultyRepository.findById(username).orElseThrow();

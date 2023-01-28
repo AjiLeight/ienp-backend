@@ -17,6 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,9 +51,9 @@ public class AuthController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
+    public ResponseEntity<AuthResponseDto> register(@RequestBody RegisterDto registerDto){
         if(userRepository.existsByUsername(registerDto.getUsername())){
-            return new ResponseEntity<>("username already taken", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new AuthResponseDto("Email already taken",""), HttpStatus.BAD_REQUEST);
         }
         UserEntity user = new UserEntity();
         user.setUsername(registerDto.getUsername());
@@ -70,7 +71,18 @@ public class AuthController {
 
         facultyRepository.save(userFaculty);
 
-        return new ResponseEntity<>("User Created Successfully", HttpStatus.OK);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        registerDto.getUsername(),
+                        registerDto.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtGenerator.generateToken(authentication);
+        facultyRepository.findById(registerDto.getUsername());
+
+        return new ResponseEntity<>(new AuthResponseDto(token,registerDto.getUsername()), HttpStatus.OK);
 
     }
 
@@ -85,8 +97,10 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
+        Faculty faculty = facultyRepository.findById(loginDto.getUsername()).orElseThrow();
 
-        return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
+        return new ResponseEntity<>(new AuthResponseDto(token, faculty.getUsername()), HttpStatus.OK);
     }
+
 
 }
