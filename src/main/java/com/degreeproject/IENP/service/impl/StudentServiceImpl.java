@@ -21,7 +21,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getStudentByRollNo(Long rollNo) {
+    public Student getStudentByRollNo(String rollNo) {
         return studentRepository.findByRollNo(rollNo);
     }
 
@@ -36,7 +36,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteStudent(Long rollNo) {
+    public void deleteStudent(String rollNo) {
         studentRepository.deleteById(rollNo);
     }
 
@@ -47,5 +47,12 @@ public class StudentServiceImpl implements StudentService {
         existingStudent.setName(student.getName());
 
         return studentRepository.save(existingStudent);
+    }
+
+    @Override
+    public Student promoteStudent(String rollNo) {
+        Student student = studentRepository.findByRollNo(rollNo);
+        student.setYear(Integer.toString(Integer.parseInt(student.getYear())+1));
+        return studentRepository.save(student);
     }
 }

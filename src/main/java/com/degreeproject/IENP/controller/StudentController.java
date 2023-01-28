@@ -18,7 +18,7 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id){
+    public ResponseEntity<Student> getStudentById(@PathVariable String id){
         return ResponseEntity.ok(studentService.getStudentByRollNo(id));
     }
 
@@ -44,7 +44,7 @@ public class StudentController {
     }
 
     @DeleteMapping("{rollNo}")
-    public ResponseEntity<String> deleteStudent(@PathVariable Long rollNo){
+    public ResponseEntity<String> deleteStudent(@PathVariable String rollNo){
         studentService.deleteStudent(rollNo);
         return ResponseEntity.ok("Deleted "+ rollNo);
     }
@@ -57,4 +57,20 @@ public class StudentController {
 
         return ResponseEntity.ok(studentService.updateStudent(student));
     }
+    @DeleteMapping()
+    public ResponseEntity<String> deleteStudent(@RequestBody List<String> rollNoList){
+        rollNoList.forEach(rollNo -> {
+            studentService.deleteStudent(rollNo);
+        });
+        return ResponseEntity.ok("Deleted");
+    }
+
+    @PutMapping("increase")
+    public ResponseEntity<String> promoteStudent(@RequestBody List<String> rollNoList) {
+        rollNoList.forEach(rollNo -> {
+            studentService.promoteStudent(rollNo);
+        });
+        return ResponseEntity.ok("promoted");
+    }
+
 }

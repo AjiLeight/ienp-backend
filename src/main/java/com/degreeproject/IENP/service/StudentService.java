@@ -6,10 +6,11 @@ import java.util.List;
 
 public interface StudentService {
     List<Student> getStudentByDepartment(String department);
-    Student getStudentByRollNo(Long rollNo);
+    Student getStudentByRollNo(String rollNo);
     Student addStudent(Student student);
     List<Student> getStudentByDepartmentAndYear(String department, String year);
-    void deleteStudent(Long rollNo);
+    void deleteStudent(String rollNo);
     Student updateStudent(Student student);
+    Student promoteStudent(String rollNo);
 
 }
