@@ -13,8 +13,10 @@ public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long rollNo;
+    private String rollNo;
     private String subject;
-    private String Month;
+    private String month;
     private String year;
+    private String mark;
+
 }
