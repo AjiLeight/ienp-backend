@@ -1,8 +1,5 @@
 package com.degreeproject.IENP.service;
 
-<<<<<<< Updated upstream
-public class StudentService {
-=======
 import com.degreeproject.IENP.entity.Student;
 
 import java.util.List;
@@ -15,5 +12,4 @@ public interface StudentService {
     void deleteStudent(Long rollNo);
     Student updateStudent(Student student);
 
->>>>>>> Stashed changes
 }

@@ -1,8 +1,5 @@
 package com.degreeproject.IENP.service.impl;
 
-<<<<<<< Updated upstream
-public class FacultyServiceImpl {
-=======
 import com.degreeproject.IENP.entity.Faculty;
 import com.degreeproject.IENP.repository.FacultyRepository;
 import com.degreeproject.IENP.service.FacultyService;
@@ -23,5 +20,4 @@ public class FacultyServiceImpl implements FacultyService {
     public Faculty getFaculty(String username) {
         return facultyRepository.findById(username).orElseThrow();
     }
->>>>>>> Stashed changes
 }

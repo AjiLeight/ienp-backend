@@ -1,8 +1,5 @@
 package com.degreeproject.IENP.service.impl;
 
-<<<<<<< Updated upstream
-public class StudentServiceImpl {
-=======
 import com.degreeproject.IENP.entity.Student;
 import com.degreeproject.IENP.repository.StudentRepository;
 import com.degreeproject.IENP.service.StudentService;
@@ -51,5 +48,4 @@ public class StudentServiceImpl implements StudentService {
 
         return studentRepository.save(existingStudent);
     }
->>>>>>> Stashed changes
 }
