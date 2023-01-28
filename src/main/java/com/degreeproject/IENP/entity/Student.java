@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Student {
     @Id
     @Column(nullable = false)
-    private Long rollNo;
+    private String rollNo;
     @Column(nullable = false)
 
     private String name;
