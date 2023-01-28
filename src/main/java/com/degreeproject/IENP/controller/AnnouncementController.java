@@ -59,7 +59,7 @@ public class AnnouncementController {
         }
         Announcement exisitingAnnouncement = announcementService.getAnnouncementById(id);
         exisitingAnnouncement.setTitle(announcement.getTitle());
-        exisitingAnnouncement.setSubject(announcement.getTitle());
+        exisitingAnnouncement.setSubject(announcement.getSubject());
         exisitingAnnouncement.setDescription(announcement.getDescription());
         exisitingAnnouncement.setFacultyId(announcement.getFacultyId());
         exisitingAnnouncement.setDate(new Date());
