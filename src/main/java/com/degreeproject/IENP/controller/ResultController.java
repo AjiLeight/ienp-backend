@@ -27,19 +27,19 @@ public class ResultController {
         return new ResponseEntity<>(resultService.addResult(result), HttpStatus.OK);
     }
 
-    @GetMapping("/subject")
-    public ResponseEntity<List<Result>> getResultBySubject(@RequestBody ResultDto resultDto ){
+    @GetMapping("/subject/{subject}/{month}/{year}")
+    public ResponseEntity<List<Result>> getResultBySubject(@PathVariable String subject, @PathVariable String month, @PathVariable String year ){
         return new ResponseEntity<>(resultService.getResultBySubjectAndMonthAndYear(
-                resultDto.getSubject(),
-                resultDto.getMonth(),
-                resultDto.getYear()),HttpStatus.OK);
+                subject,
+                month,
+                year),HttpStatus.OK);
     }
 
-    @GetMapping("/rollno")
-    public ResponseEntity<List<Result>> getResultRollNo(@RequestBody ResultDto resultDto ){
+    @GetMapping("/rollno/{rollNo}/{month}/{year}")
+    public ResponseEntity<List<Result>> getResultRollNo(@PathVariable String rollNo, @PathVariable String month, @PathVariable String year  ){
         return new ResponseEntity<>(resultService.getResultByRollNoAndMonthAndYear(
-                resultDto.getRollNo(),
-                resultDto.getMonth(),
-                resultDto.getYear()),HttpStatus.OK);
+                rollNo,
+                month,
+                year),HttpStatus.OK);
     }
 }

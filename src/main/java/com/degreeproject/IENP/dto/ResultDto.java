@@ -9,5 +9,4 @@ public class ResultDto {
     private String month;
     private String year;
     private String mark;
-
 }
