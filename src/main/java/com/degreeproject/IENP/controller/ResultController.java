@@ -27,6 +27,18 @@ public class ResultController {
         return new ResponseEntity<>(resultService.addResult(result), HttpStatus.OK);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Result> updateResult(@PathVariable Long id, @RequestBody ResultDto resultDto){
+        Result result = new Result();
+        result.setId(id);
+        result.setRollNo(resultDto.getRollNo());
+        result.setMonth(resultDto.getMonth());
+        result.setYear(resultDto.getYear());
+        result.setSubject(resultDto.getSubject());
+        result.setMark(resultDto.getMark());
+        return new ResponseEntity<>(resultService.addResult(result), HttpStatus.OK);
+    }
+
     @GetMapping("/subject/{subject}/{month}/{year}")
     public ResponseEntity<List<Result>> getResultBySubject(@PathVariable String subject, @PathVariable String month, @PathVariable String year ){
         return new ResponseEntity<>(resultService.getResultBySubjectAndMonthAndYear(
@@ -41,5 +53,11 @@ public class ResultController {
                 rollNo,
                 month,
                 year),HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteResult(@PathVariable Long id){
+        resultService.deleteResult(id);
+        return new ResponseEntity<>("Record Deleted", HttpStatus.OK);
     }
 }

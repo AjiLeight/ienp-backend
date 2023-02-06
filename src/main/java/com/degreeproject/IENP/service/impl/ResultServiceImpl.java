@@ -30,11 +30,20 @@ public class ResultServiceImpl implements ResultService {
 
     @Override
     public Result updateResult(Result result) {
-        return null;
+        Result existingResult = resultRepository.findById(result.getId()).orElseThrow();
+        existingResult.setSubject(result.getSubject());
+        existingResult.setRollNo(result.getRollNo());
+        existingResult.setMonth(result.getMonth());
+        existingResult.setYear(result.getYear());
+        existingResult.setMark(result.getMark());
+
+        return resultRepository.save(existingResult);
     }
 
     @Override
-    public void deleteResult(Result result) {
-
+    public void deleteResult(Long id) {
+        resultRepository.deleteById(id);
     }
+
+
 }

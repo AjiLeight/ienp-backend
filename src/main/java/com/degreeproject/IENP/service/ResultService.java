@@ -9,5 +9,5 @@ public interface ResultService {
     List<Result> getResultBySubjectAndMonthAndYear(String subject, String month, String year);
     List<Result> getResultByRollNoAndMonthAndYear(String rollNo, String month, String year);
     Result updateResult(Result result);
-    void deleteResult(Result result);
+    void deleteResult(Long id);
 }
