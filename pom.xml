@@ -44,7 +44,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--		dependancies for security-->
+		<!--dependancies for security-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
