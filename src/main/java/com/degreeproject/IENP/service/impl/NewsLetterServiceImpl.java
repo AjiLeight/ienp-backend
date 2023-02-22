@@ -6,6 +6,8 @@ import com.degreeproject.IENP.service.NewsLetterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NewsLetterServiceImpl implements NewsLetterService {
     @Autowired
@@ -16,5 +18,10 @@ public class NewsLetterServiceImpl implements NewsLetterService {
         NewsLetter newsLetter = new NewsLetter();
         newsLetter.setEmail(email);
         return newsLetterRepository.save(newsLetter);
+    }
+
+    @Override
+    public List<NewsLetter> getAllEmails() {
+        return newsLetterRepository.findAll();
     }
 }

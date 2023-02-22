@@ -1,7 +1,10 @@
 package com.degreeproject.IENP.service.impl;
 
+import com.degreeproject.IENP.dto.AnnouncementDto;
 import com.degreeproject.IENP.entity.EmailDetails;
+import com.degreeproject.IENP.entity.NewsLetter;
 import com.degreeproject.IENP.service.EmailService;
+import com.degreeproject.IENP.service.NewsLetterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -9,8 +12,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmailServiceImpl implements EmailService {
+    @Autowired
+    private NewsLetterService newsLetterService;
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -32,5 +39,18 @@ public class EmailServiceImpl implements EmailService {
         catch (Exception e){
             System.out.println( e.getMessage());
         }
+    }
+
+    @Async
+    @Override
+    public void sendBulkEmail(AnnouncementDto announcementDto) {
+        List<NewsLetter> emailList = newsLetterService.getAllEmails();
+        emailList.forEach(email -> {
+            EmailDetails emailDetails = new EmailDetails();
+            emailDetails.setSubject(announcementDto.getSubject());
+            emailDetails.setRecipient(email.getEmail());
+            emailDetails.setMessageBody(announcementDto.getTitle() + "\n\n" + announcementDto.getDescription() + "\n\n Thanks and Regards \n XYZ University");
+            sendSimpleEmail(emailDetails);
+        });
     }
 }

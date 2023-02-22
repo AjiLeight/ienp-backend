@@ -2,8 +2,8 @@ package com.degreeproject.IENP.controller;
 
 import com.degreeproject.IENP.dto.AnnouncementDto;
 import com.degreeproject.IENP.entity.Announcement;
-import com.degreeproject.IENP.repository.AnnouncementRepository;
 import com.degreeproject.IENP.service.AnnouncementService;
+import com.degreeproject.IENP.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,9 @@ import java.util.List;
 @RequestMapping("/api/v1/announcement")
 public class AnnouncementController {
 
+    @Autowired
+    private EmailService emailService;
+    @Autowired
     private AnnouncementService announcementService;
 
     @Autowired
@@ -35,6 +38,7 @@ public class AnnouncementController {
         announcement.setDate(new Date());
         announcement.setFacultyId(announcementDto.getFacultyId());
 
+        emailService.sendBulkEmail(announcementDto);
         return new ResponseEntity<>( announcementService.addAnnouncement(announcement) , HttpStatus.OK);
     }
 

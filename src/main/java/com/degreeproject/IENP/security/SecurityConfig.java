@@ -39,6 +39,7 @@ public class SecurityConfig{
                 .antMatchers(HttpMethod.GET, "/api/v1/results/rollno/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/v1/student/**").permitAll()
                 .antMatchers("/api/v1/newsletter").permitAll()
+                .antMatchers("/api/v1/mail").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
