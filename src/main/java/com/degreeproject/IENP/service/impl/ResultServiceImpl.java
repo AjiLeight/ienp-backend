@@ -6,6 +6,7 @@ import com.degreeproject.IENP.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -43,6 +44,12 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public void deleteResult(Long id) {
         resultRepository.deleteById(id);
+    }
+
+    @Transactional
+    @Override
+    public void deleteResultByStudent(String rollNo) {
+        resultRepository.deleteAllByRollNo(rollNo);
     }
 
 

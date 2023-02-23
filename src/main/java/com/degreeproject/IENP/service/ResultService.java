@@ -10,4 +10,5 @@ public interface ResultService {
     List<Result> getResultByRollNoAndMonthAndYear(String rollNo, String month, String year);
     Result updateResult(Result result);
     void deleteResult(Long id);
+    void deleteResultByStudent(String rollNo);
 }
