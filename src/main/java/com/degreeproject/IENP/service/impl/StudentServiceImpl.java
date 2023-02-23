@@ -2,6 +2,7 @@ package com.degreeproject.IENP.service.impl;
 
 import com.degreeproject.IENP.entity.Student;
 import com.degreeproject.IENP.repository.StudentRepository;
+import com.degreeproject.IENP.service.ResultService;
 import com.degreeproject.IENP.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private final StudentRepository studentRepository;
+    @Autowired
+    private ResultService resultService;
     @Override
     public List<Student> getStudentByDepartment(String department) {
         return studentRepository.findAllByDepartmentContains(department);
@@ -37,6 +40,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteStudent(String rollNo) {
+        resultService.deleteResultByStudent(rollNo);
         studentRepository.deleteById(rollNo);
     }
 

@@ -8,5 +8,6 @@ import java.util.List;
 public interface ResultRepository extends JpaRepository<Result, Long> {
     List<Result> findAllBySubjectAndMonthAndYear(String subject, String month, String year);
     List<Result> findAllByRollNoAndMonthAndYear(String rollNo, String month, String year);
+    void deleteAllByRollNo(String rollNo);
 
 }
